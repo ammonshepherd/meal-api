@@ -1,7 +1,7 @@
 # app.py
 import os
 import requests
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -59,6 +59,14 @@ def show_meal():
         errors.append('Error getting results from database')
 
     return render_template('show-meals.html', errors=errors, results=results)
+
+@app.route('/all')
+def all():
+    try:
+        results = Meals.query.all()
+    except:
+        error = 'Can not return all results'
+    return jsonify(meals = [meal.serialize for meal in results])
 
 if __name__ == '__main__':
     app.run()

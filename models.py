@@ -21,3 +21,15 @@ class Meals(db.Model):
  
     def __repr__(self):
         return f"{self.title}:{self.description}:{self.ingredients}:{self.image}:{self.url}"
+
+    @property
+    def serialize(self):
+        return {
+                'id': self.id,
+                'title': self.title,
+                'description': self.description,
+                'ingredients': self.ingredients,
+                'image': self.image,
+                'url': self.url,
+                }
+
