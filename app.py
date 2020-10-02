@@ -1,6 +1,7 @@
 # app.py
 import os
-from flask import Flask
+import requests
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -17,9 +18,35 @@ def hello():
     return "Hello World!"
 
 
-@app.route('/<name>')
-def hello_name(name):
-    return "Hello {}!".format(name)
+@app.route('/add-meal/', methods=['GET', 'POST'])
+def add_meal():
+    errors = []
+    results = {}
+
+    if request.method == "POST":
+        try:
+            title = request.form['title']
+            description = request.form['description']
+            ingredients = request.form['ingredients']
+            image = request.form['image']
+            url = request.form['url']
+        except:
+            errors.append("Unable to submit form.")
+
+        try:
+            result = Meals(
+                    title = title,
+                    description = description,
+                    ingredients = ingredients,
+                    image = image,
+                    url = url
+                    )
+            db.session.add(result)
+            db.session.commit()
+        except:
+            errors.append('Could not update database')
+
+    return render_template('add-meal.html', errors=errors)
 
 
 if __name__ == '__main__':
