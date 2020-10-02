@@ -49,6 +49,17 @@ def add_meal():
     return render_template('add-meal.html', errors=errors)
 
 
+@app.route('/show-meals/')
+def show_meal():
+    errors = []
+    
+    try:
+        results = Meals.query.all()
+    except:
+        errors.append('Error getting results from database')
+
+    return render_template('show-meals.html', errors=errors, results=results)
+
 if __name__ == '__main__':
     app.run()
 
