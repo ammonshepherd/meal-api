@@ -26,3 +26,13 @@ Following this tutorial: https://realpython.com/flask-by-example-part-1-project-
 ## Push to heroku
 - Add and commit any changes, then
   - `git push -u heroku master`
+
+
+## Database Management
+- using Flask-Migrate (which uses Alembic and SQLAlchemy)
+- Create a new migration (to add a new column)
+  - `python manage.py db revision -m "Add new column"`
+  - This will create a new file in `migrations/versions/` named like `<hash>-add-new-column.py`
+  - Then add commands to the 'upgrade' and 'downgrade' functions.
+  - A list of commands are found here: https://alembic.sqlalchemy.org/en/latest/ops.html#ops
+

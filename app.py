@@ -26,7 +26,7 @@ def add_meal():
     if request.method == "POST":
         try:
             title = request.form['title']
-            description = request.form['description']
+            instructions = request.form['instructions']
             ingredients = request.form['ingredients']
             image = request.form['image']
             url = request.form['url']
@@ -36,7 +36,7 @@ def add_meal():
         try:
             result = Meals(
                     title = title,
-                    description = description,
+                    instructions = instructions,
                     ingredients = ingredients,
                     image = image,
                     url = url
@@ -62,6 +62,7 @@ def show_meal():
 
 @app.route('/all')
 def all():
+    results = ''
     try:
         results = Meals.query.all()
     except:
