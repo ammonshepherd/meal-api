@@ -15,8 +15,12 @@
       <form role="form" method='POST' action='/add-meal/'>
         <div class="form-group">
           <input type="text" name="title" class="form-control" id="title-box" placeholder="Enter Title..." style="max-width: 300px;" autofocus required>
-          <input type="text" name="description" class="form-control" id="description-box" placeholder="Enter Description..." style="max-width: 300px;" autofocus>
-          <input type="text" name="ingredients" class="form-control" id="ingredients-box" placeholder="Enter Ingredients..." style="max-width: 300px;" autofocus>
+          <textarea name="description" class="form-control"
+            id="description-box" placeholder="Enter Description..."
+            style="max-width: 300px;" autofocus></textarea>
+          <textarea name="ingredients" class="form-control"
+            id="ingredients-box" placeholder="Enter Ingredients..."
+            style="max-width: 300px;" autofocus></textarea>
           <input type="text" name="image" class="form-control" id="image-box" placeholder="Enter Image..." style="max-width: 300px;" autofocus>
           <input type="text" name="url" class="form-control" id="url-box" placeholder="Enter URL..." style="max-width: 300px;" autofocus>
         </div>
