@@ -35,4 +35,8 @@ Following this tutorial: https://realpython.com/flask-by-example-part-1-project-
   - This will create a new file in `migrations/versions/` named like `<hash>-add-new-column.py`
   - Then add commands to the 'upgrade' and 'downgrade' functions.
   - A list of commands are found here: https://alembic.sqlalchemy.org/en/latest/ops.html#ops
+- Run the upgrade locally
+  - `python manage.py db upgrade head`
+- Run the upgrade on heroku
+  - `heroku run python manage.py db upgrade`
 
