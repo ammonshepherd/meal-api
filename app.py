@@ -69,6 +69,16 @@ def all():
         error = 'Can not return all results'
     return jsonify(meals = [meal.serialize for meal in results])
 
+@app.route('/meal/<id>')
+def meal(id):
+    results = ''
+    try: 
+        meal = Meals.query.get(id)
+    except:
+        error = "No result found"
+    return jsonify(meal.serialize)
+
+
 if __name__ == '__main__':
     app.run()
 
