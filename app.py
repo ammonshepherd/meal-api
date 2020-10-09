@@ -60,7 +60,7 @@ def show_meal():
 
     return render_template('show-meals.html', errors=errors, results=results)
 
-@app.route('/all')
+@app.route('/all/')
 def all():
     results = ''
     try:
