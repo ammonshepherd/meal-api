@@ -1,36 +1,31 @@
+<!DOCTYPE html>
 <html>
-  <head>
+<head>
   <title>Meal App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Compiled and minified CSS -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">   
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
-    <style>
-      .container {
-        max-width: 1000px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1>The Meals</h1>
-      <table>
-      {% for meal in results %}
-        <tr>
-          <td><img src="{{ meal.image }}" /></td>
-          <td>{{ meal.title }}</td>
-          <td>{{ meal.description }}</td>
-        </tr>
-        {% endfor %}
-      </table>
-      <br>
-      {% for error in errors %}
-        <h4>{{ error }}</h4>
-      {% endfor %}
-    </div>
+
+
+</head>
+<body>
+<div class="container">
+  <h1>Meal App API</h1>
+
+  <div id="links">
+  <h2>API Links</h2>
+    <ul>
+      <li><i class="material-icons">menu</i> <a href="/all/">All Meals</a></li>
+      <li><i class="material-icons">add</i> <a href="/add-meal/">Add a Meal</a></li>
+      <li><i class="material-icons">restaurant_menu</i> <a href="/show-meals">Display the Meals</a></li>
+    </ul>
+  </div>
+</div>
 
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  </body>
+            
+</body>
 </html>

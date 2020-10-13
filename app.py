@@ -15,7 +15,7 @@ from models import Meals
 
 @app.route('/')
 def hello():
-    return "Hello World!"
+    return render_template('home.html')
 
 
 @app.route('/add-meal/', methods=['GET', 'POST'])

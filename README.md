@@ -10,9 +10,10 @@ Following this tutorial: https://realpython.com/flask-by-example-part-1-project-
   .bashrc or .profile. (You can find the path to activate.sh with `which
   activate.sh` if autoenv is installed.)
   - `source /usr/local/bin/activate.sh`
-- Get into python virtual environment
+- Get into python virtual environment manually and set the required local
+  environment variables
   - while in the flask-api directory (where the 'env' folder is located)
-  - `source env/bin/activate`
+  - `source .env`
 - Get out of python virtual environment
   - `deactivate`
 
