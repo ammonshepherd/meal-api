@@ -5,31 +5,75 @@
         <!-- Compiled and minified CSS -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">   
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   </head>
-  <body>
+  <body class="orange lighten-5">
     <div class="container">
-      <h1>Add a meal to the Database</h1>
-      <form role="form" method='POST' action='/add-meal/'>
-        <div class="form-group">
-          <input type="text" name="title" class="form-control" id="title-box" placeholder="Enter Title..." style="max-width: 300px;" autofocus required>
-          <textarea name="description" class="form-control"
-            id="description-box" placeholder="Enter Description..."
-            style="max-width: 300px;" autofocus></textarea>
-          <textarea name="ingredients" class="form-control"
-            id="ingredients-box" placeholder="Enter Ingredients..."
-            style="max-width: 300px;" autofocus></textarea>
-          <input type="text" name="image" class="form-control" id="image-box" placeholder="Enter Image..." style="max-width: 300px;" autofocus>
-          <input type="text" name="url" class="form-control" id="url-box" placeholder="Enter URL..." style="max-width: 300px;" autofocus>
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
+      <h1 class="center-align">Add a meal to the Database</h1>
+
       <br>
       {% for error in errors %}
         <h4>{{ error }}</h4>
       {% endfor %}
-    </div>
+
+      <div class="row">
+        <div class="col s12 l2"></div>
+        <div class="col s12 l8">
+          <div class="card light-blue darken-3 z-depth-4">
+            <div class="card-content white-text">
+
+              <span class="card-title center-align"><h2>Add a Meal</h2></span>
+
+                <form id="add-form" role="form" method='POST' action='/add-meal/'>
+                  <div class="input-field">
+                    <input type="text" name="title" id="title-box" placeholder="Enter Title..." class="grey lighten-4 blue-text" autofocus required>
+                    <label for="title" class="cyan-text text-lighten-5">Title</lablel>
+                  </div>
+
+                  <div class="input-field">
+                    <textarea name="instructions" id="instructions-box"
+                      class="materialize-textarea grey lighten-4 blue-text"
+                      placeholder="Enter instructions..." autofocus></textarea>
+                    <label for="instructions"
+                      class="white-text">instructions</label>
+                  </div>
+
+                  <div class="input-field">
+                    <textarea name="ingredients" id="ingredients-box" 
+                      class="materialize-textarea grey lighten-4 blue-text" 
+                      placeholder="Enter Ingredients..." autofocus></textarea>
+                    <label for="ingredients" class="cyan-text
+                      text-lighten-5">Ingredients<label>
+                  </div>
+
+                  <div class="input-field">
+                    <input type="text" name="image" id="image-box" class="grey
+                      lighten-4 blue-text" placeholder="Enter image url..." autofocus>
+                    <label for="image" class="cyan-text
+                      text-lighten-5">Image</label>
+                  </div>
+                  <div class="input-field">
+                    <input type="text" name="url" id="url-box" class="grey 
+                      lighten-4 blue-text" placeholder="Enter URL..." autofocus>
+                    <label for="url" class="cyan-text
+                      text-lighten-5">URL</label>
+                  </div>
+                
+                  <div class="card-action">
+                    <button type="submit" class="waves-effect waves-light btn"><i
+                    class="material-icons left">cloud</i>Submit</button>
+                  </div>
+                </form>
+
+            </div> <!-- card-content -->
+          </div> <!-- card -->
+        </div> <!-- col -->
+        <div class="col s12 l2"></div>
+      </div> <!-- row -->
+
+    </div> <!-- container -->
 
 <!-- Compiled and minified JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   </body>
 </html>
