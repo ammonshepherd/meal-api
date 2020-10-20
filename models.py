@@ -3,7 +3,7 @@ from sqlalchemy.dialects.postgresql import JSON
 
  
 class Meals(db.Model):
-    __tablename__ = 'mealer'
+    __tablename__ = 'meals'
  
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String())
