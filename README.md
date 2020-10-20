@@ -47,11 +47,15 @@ Following this tutorial: https://realpython.com/flask-by-example-part-1-project-
 - This will generate a migration file in `migrations/versions/` with the
     changes you made in the database. 
     - **NOTE** You'll definitely want to double check what is automatically
-    generated. Sometimes it doesn't quite know what you want. For example,
-    changing a table name will automatically drop the old table and create a
-    new one. Instead, change that to use the rename_table command for the
-    upgrade and downgrade.
-    
+      generated. Sometimes it doesn't quite know what you want. 
+    - For example, changing a table name will automatically drop the old table
+      and create a new one. 
+    - Instead, change that to use the rename_table command for the upgrade and
+      downgrade.
+- Delete the changes from the database, then run the upgrade command to redo
+  the changes
+  - `python manage.py db upgrade`
+
 ### Run the changes
 - Run the upgrade locally
   - `python manage.py db upgrade head`
