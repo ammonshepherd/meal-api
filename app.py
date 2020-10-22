@@ -69,7 +69,7 @@ def all():
         error = 'Can not return all results'
     return jsonify(meals = [meal.serialize for meal in results])
 
-@app.route('/meal/<id>')
+@app.route('/meal/<int:id>/')
 def meal(id):
     results = ''
     try: 
