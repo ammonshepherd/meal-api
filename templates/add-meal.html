@@ -5,7 +5,6 @@
         <!-- Compiled and minified CSS -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">   
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   </head>
   <body class="orange lighten-5">
     <div class="container">
@@ -26,13 +25,14 @@
 
                 <form id="add-form" role="form" method='POST' action='/add-meal/'>
                   <div class="input-field">
-                    <input type="text" name="title" id="title-box" placeholder="Enter Title..." class="grey lighten-4 blue-text" autofocus required>
+                    <input type="text" name="title" id="title-box" class="grey lighten-4 blue-text" 
+                    placeholder="Enter Title..." class="input" autofocus required>
                     <label for="title" class="cyan-text text-lighten-5">Title</lablel>
                   </div>
 
                   <div class="input-field">
                     <textarea name="instructions" id="instructions-box"
-                      class="materialize-textarea grey lighten-4 blue-text"
+                      class="materialize-textarea grey lighten-4 blue-text" 
                       placeholder="Enter instructions..." autofocus></textarea>
                     <label for="instructions"
                       class="white-text">instructions</label>
@@ -47,8 +47,7 @@
                   </div>
 
                   <div class="input-field">
-                    <input type="text" name="image" id="image-box" class="grey
-                      lighten-4 blue-text" placeholder="Enter image url..." autofocus>
+                    <input type="text" name="image" id="image-box" class="grey lighten-4 blue-text" placeholder="Enter image url..." autofocus>
                     <label for="image" class="cyan-text
                       text-lighten-5">Image</label>
                   </div>
