@@ -1,4 +1,3 @@
-# app.py
 import os
 import requests
 from flask import Flask, render_template, request, jsonify
@@ -10,12 +9,39 @@ app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-from models import Meals
+from models import Meals, Plans
 
 
 @app.route('/')
 def hello():
     return render_template('home.html')
+
+@app.route('/add-plan/', methods=['POST'])
+def add_plan():
+    errors = []
+    if request.is_json:
+        data = request.get_json()
+        print(data)
+        payload = Plans(
+                date = data.get('date'),
+                meal_id = data.get('meal')
+                )
+        db.session.add(payload)
+        db.session.commit()
+        return "plan added", 200
+
+@app.route('/drop-plan/', methods=['POST'])
+def drop_plan():
+    if request.is_json:
+        data = request.get_json()
+        payload = Plans(
+                date = data.get('date'),
+                meal_id = data.get('meal')
+                )
+        db.session.delete(payload)
+        db.session.commit()
+        return "plan deleted", 200
+
 
 
 @app.route('/add-meal/', methods=['GET', 'POST'])
