@@ -33,3 +33,25 @@ class Meals(db.Model):
                 'url': self.url,
                 }
 
+class Plans(db.Model):
+    __tablename__ = 'plans'
+
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.Date)
+    meal_id = db.Column(db.Integer)
+
+
+    def __init__(self, date, meal_id):
+        self.date = date
+        self.meal_id = meal_id
+
+    def __repr__(self):
+        return f"{self.date}:{self.meal_id}"
+
+    @property
+    def serialize(self):
+        return {
+                'id': self.id,
+                'date': self.date,
+                'meal': self.meal_id,
+                }
