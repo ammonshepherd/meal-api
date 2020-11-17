@@ -5,24 +5,37 @@
 Following this tutorial: https://realpython.com/flask-by-example-part-1-project-setup/
 
 ## Virtual Env
-- With autoenv set up, it should automatically enter the virtual environment
-  when you 'cd' into the directory. If it doesn't, check that this line is in
-  .bashrc or .profile. (You can find the path to activate.sh with `which
-  activate.sh` if autoenv is installed.)
-  - `source /usr/local/bin/activate.sh`
-- Get into python virtual environment manually and set the required local
-  environment variables
-  - while in the flask-api directory (where the 'env' folder is located)
-  - `source .env`
+- This uses the default, built-in module 'venv'. To create your virtual
+  environment set up, do
+  - `python -m venv .venv`
+  - This will create a .venv directory and put all the needed stuff in it.
+- To get into python virtual environment 
+  - while in the flask-api directory (where the '.venv' folder is located)
+  - `source .venv/bin/activate`
 - Get out of python virtual environment
   - `deactivate`
 
+## Local Environment Variables
+- A couple of environment variables are needed to set if the app is in
+  developer or production mode, and to set the database URL.
 
-## Start local development
+  ```
+    #.env file
+    export APP_SETTINGS="config.DevelopmentConfig"
+    export DATABASE_URL="postgresql://mealer:mealer@localhost:5432/mealer"
+  ```
+- Run `source .env` to create those environment variables.
+
+## Start Local Development
 - Start Postgres locally, unless connecting to remote Postgres server
-- Make sure you are in the virtual env (see above)
-  - `python manage.py runserver`
+- Make sure you are in the virtual env (see above), then start Flask
+  - `flask run`
 - The site is now available at [http://localhost:5000 ](http://localhost:5000)
+### Local Development: Docker version
+- just run `docker-compose up -d` and this will set up your development
+  environment:
+  - pgAdmin: http://pga.lvh.me
+  - Flask: http://lvh.me or http://pfp.lvh.me
 
 ## Push to heroku
 - Add and commit any changes, then
