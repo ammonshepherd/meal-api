@@ -17,16 +17,6 @@ def home():
     return render_template('home.html', page_title="Mealer API")
 
 
-@app.route('/all/')
-def all():
-    results = ''
-    try:
-        results = Meals.query.all()
-    except:
-        error = 'Can not return all results'
-    return jsonify(meals=[meal.serialize for meal in results])
-
-
 ####################
 # plans
 ####################
@@ -64,6 +54,16 @@ def drop_plan():
 ####################
 # Meals
 ####################
+@app.route('/meals/')
+def all():
+    results = ''
+    try:
+        results = Meals.query.all()
+        return jsonify(meals=[meal.serialize for meal in results]), 200
+    except:
+        return 'Can not return all results', 400
+
+
 @app.route('/meal/<int:id>/')
 def meal(id):
     results = ''
