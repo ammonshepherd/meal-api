@@ -95,8 +95,11 @@ def add_meal():
                              image=image,
                              url=url,
                              date_added=datetime.utcnow())
-                plan = Plans(date=date, meal_id=meal)
                 db.session.add(meal)
+                db.session.flush()
+
+                plan = Plans(date=date, meal_id=meal.id)
+                db.session.add(plan)
                 db.session.commit()
 
                 message.append({
@@ -128,11 +131,15 @@ def show_meal():
 
     try:
         results = Meals.query.all()
-    except:
-        errors.append('Error getting results from database')
+    except Exception as err:
+        errors.append({
+            'title': 'Error getting results from database.',
+            'message': '{}'.format(err),
+            'state': 'error'
+        })
 
     return render_template('show-meals.html',
-                           errors=errors,
+                           message=errors,
                            results=results,
                            page_title="Mealer | Show Meals")
 
