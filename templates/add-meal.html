@@ -1,78 +1,60 @@
-<html>
-  <head>
-  <title>Meal App</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Compiled and minified CSS -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">   
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  </head>
-  <body class="orange lighten-5">
-    <div class="container">
-      <h1 class="center-align">Add a meal to the Database</h1>
+{% extends 'base.html' %}
 
-      <br>
-      {% for error in errors %}
-        <h4>{{ error }}</h4>
-      {% endfor %}
+{% block content %}
 
-      <div class="row">
-        <div class="col s12 l2"></div>
-        <div class="col s12 l8">
-          <div class="card light-blue darken-3 z-depth-4">
-            <div class="card-content white-text">
+{% if message %}
+{% for m in message %}
+<span class="message {{ m.get('state') }}">{{ m.get('title') }}
+  <pre>{{ m.get('message') }}</pre></span>
+{% endfor %}
+{% endif %}
 
-              <span class="card-title center-align"><h2>Add a Meal</h2></span>
+<div class="card">
+  <div class="card-title">
+    <h1 class="center-align">Add a meal to the Database</h1>
+  </div>
+  <div class="card-content">
+    <form id="add-form" role="form" method='POST' action='/add-meal/'>
+      <div>
+        <label for="title" class="">Meal Title</label>
+        <input type="text" name="title" id="title-box" class="" placeholder="Enter Title..."
+          value="{% if values %} {{ values.get('title') }} {% endif %}">
+      </div>
 
-                <form id="add-form" role="form" method='POST' action='/add-meal/'>
-                  <div class="input-field">
-                    <input type="text" name="title" id="title-box" class="grey lighten-4 blue-text" 
-                    placeholder="Enter Title..." class="input" autofocus required>
-                    <label for="title" class="cyan-text text-lighten-5">Title</lablel>
-                  </div>
+      <div>
+        <label for="ingredients" class="">Ingredients</label>
+        <textarea name="ingredients" id="ingredients-box"
+          class="">{% if values %} {{ values.get('ingredients') }} {% endif %}</textarea>
+      </div>
 
-                  <div class="input-field">
-                    <textarea name="instructions" id="instructions-box"
-                      class="materialize-textarea grey lighten-4 blue-text" 
-                      placeholder="Enter instructions..." autofocus></textarea>
-                    <label for="instructions"
-                      class="white-text">instructions</label>
-                  </div>
+      <div>
+        <label for="instructions" class="">Instructions</label>
+        <textarea name="instructions" id="instructions-box"
+          class="">{% if values %} {{ values.get('instructions') }} {% endif %}</textarea>
+      </div>
 
-                  <div class="input-field">
-                    <textarea name="ingredients" id="ingredients-box" 
-                      class="materialize-textarea grey lighten-4 blue-text" 
-                      placeholder="Enter Ingredients..." autofocus></textarea>
-                    <label for="ingredients" class="cyan-text
-                      text-lighten-5">Ingredients<label>
-                  </div>
+      <div>
+        <label for="image" class="">Image</label>
+        <input type="text" name="image" id="image-box" class="" placeholder="http://..."
+          value="{% if values %} {{ values.get('image') }} {% endif %}">
+      </div>
 
-                  <div class="input-field">
-                    <input type="text" name="image" id="image-box" class="grey lighten-4 blue-text" placeholder="Enter image url..." autofocus>
-                    <label for="image" class="cyan-text
-                      text-lighten-5">Image</label>
-                  </div>
-                  <div class="input-field">
-                    <input type="text" name="url" id="url-box" class="grey 
-                      lighten-4 blue-text" placeholder="Enter URL..." autofocus>
-                    <label for="url" class="cyan-text
-                      text-lighten-5">URL</label>
-                  </div>
-                
-                  <div class="card-action">
-                    <button type="submit" class="waves-effect waves-light btn"><i
-                    class="material-icons left">cloud</i>Submit</button>
-                  </div>
-                </form>
+      <div>
+        <label for="url" class="">Website URL</label>
+        <input type="text" name="url" id="url-box" class="" placeholder="http://..."
+          value="{% if values %} {{ values.get('url') }} {% endif %}">
+      </div>
 
-            </div> <!-- card-content -->
-          </div> <!-- card -->
-        </div> <!-- col -->
-        <div class="col s12 l2"></div>
-      </div> <!-- row -->
+      <div>
+        <label for="date" class="">Assign to date</label>
+        <input type="date" name="plan_date" value="{% if values %} {{ values.get('date') }} {% endif %}">
+      </div>
 
-    </div> <!-- container -->
+      <div class="center-align">
+        <button type="submit" class="add-meal-button">Submit</button>
+      </div>
+    </form>
+  </div> <!-- card-content -->
+</div> <!-- card -->
 
-<!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  </body>
-</html>
+{% endblock %}
