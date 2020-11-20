@@ -22,31 +22,31 @@
       <div>
         <label for="title" class="">Meal Title</label>
         <input type="text" name="title" id="title-box" class="" placeholder="Enter Title..."
-          value="{% if values %} {{ values.get('title') }} {% endif %}">
+          value="{% if values %}{{ values.get('title') }}{% endif %}">
       </div>
 
       <div>
         <label for="ingredients" class="">Ingredients</label>
         <textarea name="ingredients" id="ingredients-box"
-          class="">{% if values %} {{ values.get('ingredients') }} {% endif %}</textarea>
+          class="">{% if values %}{{ values.get('ingredients') }}{% endif %}</textarea>
       </div>
 
       <div>
         <label for="instructions" class="">Instructions</label>
         <textarea name="instructions" id="instructions-box"
-          class="">{% if values %} {{ values.get('instructions') }} {% endif %}</textarea>
+          class="">{% if values %}{{ values.get('instructions') }}{% endif %}</textarea>
       </div>
 
       <div>
         <label for="image" class="">Image</label>
         <input type="text" name="image" id="image-box" class="" placeholder="http://..."
-          value="{% if values %} {{ values.get('image') }} {% endif %}">
+          value="{% if values %}{{ values.get('image') }}{% endif %}">
       </div>
 
       <div>
         <label for="url" class="">Website URL</label>
         <input type="text" name="url" id="url-box" class="" placeholder="http://..."
-          value="{% if values %} {{ values.get('url') }} {% endif %}">
+          value="{% if values %}{{ values.get('url') }}{% endif %}">
       </div>
 
       <div>
