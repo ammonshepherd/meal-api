@@ -30,6 +30,15 @@ def all():
 ####################
 # plans
 ####################
+@app.route('/plans/')
+def plans():
+    try:
+        plans = Plans.query.all()
+        return jsonify(plans=[plan.serialize for plan in plans]), 200
+    except Exception as err:
+        return "error somewheres. {}".format(err), 400
+
+
 @app.route('/add-plan/', methods=['POST'])
 def add_plan():
     errors = []
@@ -125,7 +134,7 @@ def add_meal():
                            values=results)
 
 
-@app.route('/meals/')
+@app.route('/show-meals/')
 def show_meal():
     errors = []
 
