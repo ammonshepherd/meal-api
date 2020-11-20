@@ -87,14 +87,18 @@ def add_meal():
             image = request.form['image']
             url = request.form['url']
             date = request.form['plan_date']
+            if date:
+                datum = datetime.strptime(date,
+                                          "%Y-%M-%d").strftime("%Y-%M-%d")
+            else:
+                datum = ''
             results = {
                 'title': title,
                 'ingredients': ingredients,
                 'instructions': instructions,
                 'image': image,
                 'url': url,
-                'date': datetime.strptime(date,
-                                          "%Y-%M-%d").strftime("%Y-%M-%d")
+                'date': datum
             }
 
             try:
@@ -107,8 +111,9 @@ def add_meal():
                 db.session.add(meal)
                 db.session.flush()
 
-                plan = Plans(date=date, meal_id=meal.id)
-                db.session.add(plan)
+                if date:
+                    plan = Plans(date=date, meal_id=meal.id)
+                    db.session.add(plan)
                 db.session.commit()
 
                 message.append({
