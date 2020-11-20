@@ -77,15 +77,19 @@ label {
 
 .message {
   margin: 10px 22px;
-  font-size: 2em;
   vertical-align: middle;
   white-space: pre-wrap;
   padding: 12px;
   font-size: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .message pre {
   white-space: pre-wrap;
+  align-self: start;
 }
 
 .success {

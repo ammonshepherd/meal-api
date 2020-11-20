@@ -93,7 +93,8 @@ def add_meal():
                              instructions=instructions,
                              image=image,
                              url=url,
-                             date_added=datetime.utcnow)
+                             date_added=datetime.utcnow(),
+                             date_modified=datetime.utcnow())
                 plan = Plans(date=date, meal_id=meal)
                 db.session.add(meal)
                 db.session.commit()
