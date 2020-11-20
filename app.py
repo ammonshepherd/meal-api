@@ -84,7 +84,8 @@ def add_meal():
                 'instructions': instructions,
                 'image': image,
                 'url': url,
-                'date': date
+                'date': datetime.strptime(date,
+                                          "%Y-%M-%d").strftime("%Y-%M-%d")
             }
 
             try:
@@ -93,8 +94,7 @@ def add_meal():
                              instructions=instructions,
                              image=image,
                              url=url,
-                             date_added=datetime.utcnow(),
-                             date_modified=datetime.utcnow())
+                             date_added=datetime.utcnow())
                 plan = Plans(date=date, meal_id=meal)
                 db.session.add(meal)
                 db.session.commit()
@@ -122,7 +122,7 @@ def add_meal():
                            values=results)
 
 
-@app.route('/show-meals/')
+@app.route('/meals/')
 def show_meal():
     errors = []
 
