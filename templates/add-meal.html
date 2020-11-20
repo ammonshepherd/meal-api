@@ -4,8 +4,12 @@
 
 {% if message %}
 {% for m in message %}
-<span class="message {{ m.get('state') }}">{{ m.get('title') }}
-  <pre>{{ m.get('message') }}</pre></span>
+<span class="message {{ m.get('state') }}">
+  <span class="message-title">{{ m.get('title') }}</span>
+  {% if m.get('message') %}
+  <pre>{{ m.get('message') }}</pre>
+  {% endif %}
+</span>
 {% endfor %}
 {% endif %}
 
@@ -47,7 +51,7 @@
 
       <div>
         <label for="date" class="">Assign to date</label>
-        <input type="date" name="plan_date" value="{% if values %} {{ values.get('date') }} {% endif %}">
+        <input type="date" name="plan_date" value="{% if values %}{{ values.get('date') }}{% endif %}">
       </div>
 
       <div class="center-align">
