@@ -1,54 +1,37 @@
-<html>
-  <head>
-  <title>Meal App</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Compiled and minified CSS -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">   
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+{% extends 'base.html' %}
 
-    <style>
-      .container {
-        max-width: 1000px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <div class="row">
-        <div class="col s12">
-          <h1>The Meals</h1>
-        </div>
+{% block content %}
+
+{% if message %}
+{% for m in message %}
+<span class="message {{ m.get('state') }}">
+  <span class="message-title">{{ m.get('title') }}</span>
+  {% if m.get('message') %}
+  <pre>{{ m.get('message') }}</pre>
+  {% endif %}
+</span>
+{% endfor %}
+{% endif %}
+
+{% for meal in results %}
+<div class="col s12">
+  <div class="right">
+    <a href="/edit-meal/{{ meal.id }}/" class="btn-floating btn-large waves-effect waves-light red"><i
+        class="material-icons">edit</i></a>
+  </div>
+  <div class="card horizontal">
+    <div class="card-image">
+      <img class="responsive-img" src="{{ meal.image }}">
+    </div>
+    <div class="stacked">
+      <div class="card-content">
+        <p>{{ meal.title }}</p>
+        <p>{{ meal.ingredients }}</p>
+        <p>{{ meal.instructions }}</p>
       </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
 
-      {% for error in errors %}
-        <h4>{{ error }}</h4>
-      {% endfor %}
-
-      {% for meal in results %}
-      <div class="row">
-        <div class="col s12">
-          <div class="right">
-            <a href="/edit-meal/{{ meal.id }}/" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">edit</i></a>
-          </div>
-          <div class="card horizontal">
-            <div class="card-image">
-              <img class="responsive-img" src="{{ meal.image }}">
-            </div>
-            <div class="stacked">
-              <div class="card-content">
-                <p>{{ meal.title }}</p>
-                <p>{{ meal.ingredients }}</p>
-                <p>{{ meal.instructions }}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> <!-- row -->
-      {% endfor %}
-
-    </div><!-- container -->
-
-<!-- Compiled and minified JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  </body>
-</html>
+{% endblock %}

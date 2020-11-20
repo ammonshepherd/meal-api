@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>{{ page_title }}</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">   
-  <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
 
-  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">   
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
 </head>
+
 <body>
   <div id="container">
     <header>
@@ -24,10 +26,10 @@
     </header>
 
     <nav>
-        <a href="/meals/">All Meals</a>
-        <a href="/plans/">All Plans</a>
-        <a href="/add-meal/">Add Meal</a>
-        <a href="/add-plan/">Add Plan</a>
+      <a href="/meals/">All Meals</a>
+      <a href="/plans/">All Plans</a>
+      <a href="/add-meal/">Add Meal</a>
+      <a href="/add-plan/">Add Plan</a>
     </nav>
 
     {% block content %}
@@ -35,4 +37,5 @@
 
   </div> <!-- container -->
 </body>
+
 </html>
