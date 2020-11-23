@@ -20,11 +20,16 @@ def home():
 ####################
 # plans
 ####################
-@app.route('/plans/')
-def plans():
+@app.route('/plans/', defaults={'date': 'all'})
+@app.route('/plans/date/<date>')
+def plans(date):
     try:
-        plans = Plans.query.all()
-        return jsonify(plans=[plan.serialize for plan in plans]), 200
+        if (date == 'all'):
+            plans = Plans.query.all()
+            return jsonify(plans=[plan.serialize for plan in plans]), 200
+        else:
+            plans = Plans.query.filter_by(date=date).all()
+            return jsonify(plans=[plan.serialize for plan in plans]), 200
     except Exception as err:
         return "error somewheres. {}".format(err), 400
 
@@ -35,18 +40,17 @@ def add_plan():
     if request.is_json:
         data = request.get_json()
         print(data)
-        payload = Plans(date=data.get('date'), meal_id=data.get('meal'))
-        db.session.add(payload)
+        plan = Plans(date=data.get('date'), meal_id=data.get('meal'))
+        db.session.add(plan)
         db.session.commit()
-        return "plan added", 200
+        return str(plan.id), 200
 
 
 @app.route('/drop-plan/', methods=['POST'])
 def drop_plan():
     if request.is_json:
         data = request.get_json()
-        payload = Plans(date=data.get('date'), meal_id=data.get('meal'))
-        db.session.delete(payload)
+        Plans.query.filter_by(id=data.get('planId')).delete()
         db.session.commit()
         return "plan deleted", 200
 
