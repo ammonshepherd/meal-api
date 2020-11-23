@@ -14,22 +14,20 @@
 {% endif %}
 
 {% for meal in results %}
-<div class="col s12">
-  <div class="right">
-    <a href="/edit-meal/{{ meal.id }}/" class="btn-floating btn-large waves-effect waves-light red"><i
-        class="material-icons">edit</i></a>
+<div class="meal-card">
+  <div class="meal-card-image">
+    <img class="responsive-img" src="{{ meal.image }}">
   </div>
-  <div class="card horizontal">
-    <div class="card-image">
-      <img class="responsive-img" src="{{ meal.image }}">
+  <div class="meal-card-title">
+    <p>{{ meal.title }}</p>
+    <div class="right">
+      <a href="/edit-meal/{{ meal.id }}/" class=""><i
+          class="material-icons">edit</i></a>
     </div>
-    <div class="stacked">
-      <div class="card-content">
-        <p>{{ meal.title }}</p>
-        <p>{{ meal.ingredients }}</p>
-        <p>{{ meal.instructions }}</p>
-      </div>
-    </div>
+  </div>
+  <div class="meal-card-content">
+    <p>{{ meal.ingredients }}</p>
+    <p>{{ meal.instructions }}</p>
   </div>
 </div>
 {% endfor %}

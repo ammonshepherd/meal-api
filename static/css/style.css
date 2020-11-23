@@ -1,11 +1,11 @@
 body {
   font-family: 'Raleway', sans-serif;
-  background-color: #f8efea;
+  background-color: #f7fff7;
 }
 
 
 #container {
-  width: 80%;
+  width: 90%;
   margin: auto;
   display: grid;
   grid-template-rows: 100px 50px auto;
@@ -17,10 +17,6 @@ header {
 
 nav {
   grid-row: 2 / 3;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: stretch;
 }
 
 main {
@@ -40,34 +36,70 @@ label {
   align-self: center;
 }
 
-.card {
-  margin: 2em;
+.right {
+  float: right;
+}
+
+.meal-card {
+  margin: 20px 0px;
   padding: 16px 24px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   border-radius: 5px;
   background: #fff;
   display: grid;
-  grid-template-columns: 40px auto 40px;
-  grid-template-rows: 100px auto;
+  grid-template-columns: 30% auto;
+  grid-template-rows: 20% auto;
+  column-gap: 20px;
+  row-gap: 10px;
+}
+
+.meal-card-image {
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+}
+
+.meal-card-title {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+
+.meal-card-content {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+
+.meal-card-image img {
+  width: 250px;
+}
+
+.meal-card h1 {
+  color: #ded369;
+  font-weight: 700;
+}
+
+.card {
+  padding: 16px 24px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+  background: #fff;
+  display: grid;
+  grid-template-columns: 5% auto 5%;
+  grid-template-rows: 5% auto;
+  column-gap: 20px;
+  row-gap: 10px;
+
 }
 
 .card-title {
   grid-column: 2 / 3;
   grid-row: 1 / 2;
-  justify-self: stretch;
 }
 
 .card-content {
   grid-column: 2 / 3;
   grid-row: 2 / 3;
-  justify-self: stretch;
-  justify-content: center;
-}
-
-.card h1 {
-  color: #ded369;
-  font-weight: 700;
 }
 
 ::placeholder {
@@ -110,7 +142,7 @@ header {
   grid-template-columns: 100px auto;
   grid-template-rows: 50px 20px;
   justify-items: start;
-  background: #ded369;
+  background: rgb(255, 230, 109);
 }
 
 .logo {
@@ -141,6 +173,54 @@ header {
 /**********************
 * Navigation bar
 **********************/
+nav {
+  display: grid;
+  grid-template-columns: 30fr 70fr;
+  column-gap: 8px;
+  align-content: space-around;
+  justify-content: stretch;
+  background-color: rgb(41, 47, 54);
+}
+
+#api-links,
+#web-links {
+  place-self: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgb(255, 230, 109);
+}
+
+#api-links {
+  color: rgb(78, 205, 196);
+}
+
+#web-links {
+  color: rgb(255, 107, 107);
+}
+
+.link-title {
+  font-weight: bolder;
+  align-self: center;
+}
+
+#api-links a,
+#web-links a {
+  padding: 10px;
+  color: #f7fff7;
+  text-decoration: none;
+}
+
+#api-links a:hover {
+  background-color: rgb(78, 205, 196);
+}
+
+#web-links a:hover {
+  background-color: rgb(255, 107, 107);
+}
+
 
 /**********************
  * add-meal form
