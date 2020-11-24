@@ -21,7 +21,7 @@ class Meals(db.Model):
     plans = db.relationship('Plans', backref='meals', lazy=True)
 
     def __repr__(self):
-        return f"{self.title}:{self.instructions}:{self.ingredients}:{self.image}:{self.url}:{self.date_added}:{self.date_modified}"
+        return f"{self.id,self.title},{self.instructions},{self.ingredients},{self.image},{self.url},{self.date_added},{self.date_modified}"
 
     @property
     def serialize(self):
@@ -45,7 +45,7 @@ class Plans(db.Model):
     meal_id = db.Column(db.Integer, db.ForeignKey("meals.id"), nullable=False)
 
     def __repr__(self):
-        return f"{self.date}:{self.meal_id}"
+        return f"{self.id, self.date},{self.meal_id}"
 
     @property
     def serialize(self):
@@ -54,3 +54,16 @@ class Plans(db.Model):
             'date': self.date,
             'meal': self.meal_id,
         }
+
+
+def plansToDict(plans):
+    response = {}
+    for i in range(0, len(plans)):
+        response[i] = {
+            'planId': plans[i].id,
+            'day': plans[i].date,
+            'title': plans[i].title
+        }
+
+    # return must be a string, dict or tuple
+    return response

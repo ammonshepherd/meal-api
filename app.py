@@ -9,12 +9,16 @@ app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-from models import Meals, Plans
+from models import Meals, Plans, plansToDict
 
 
 @app.route('/')
 def home():
     return render_template('home.html', page_title="Mealer API")
+
+
+### TODOs ###
+# TODO: Make all routes secure by requiring a token to be matched against one in the database for a user
 
 
 ####################
@@ -25,13 +29,20 @@ def home():
 def plans(date):
     try:
         if (date == 'all'):
-            plans = Plans.query.all()
-            return jsonify(plans=[plan.serialize for plan in plans]), 200
+            plans = db.session.query(Plans.id, Plans.date,
+                                     Meals.title).join(Meals).all()
+            # returns a list in this format
+            # [(14, datetime.date(2020, 11, 28), 'pbj'),
+            #  (15, datetime.date(2020, 11, 28), 'pbj'),
+            #  (16, datetime.date(2020, 12, 2), 'pbj')]
+            return plansToDict(plans), 200
         else:
-            plans = Plans.query.filter_by(date=date).all()
-            return jsonify(plans=[plan.serialize for plan in plans]), 200
+            plans = db.session.query(
+                Plans.id, Plans.date,
+                Meals.title).join(Meals).filter(Plans.date == date).all()
+            return plansToDict(plans), 200
     except Exception as err:
-        return "error somewheres. {}".format(err), 400
+        return "Error getting plans from the database. {}".format(err), 400
 
 
 @app.route('/add-plan/', methods=['POST'])
