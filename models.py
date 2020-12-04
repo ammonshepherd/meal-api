@@ -1,5 +1,6 @@
 from app import db
 from datetime import datetime
+from pprint import pprint
 
 
 class Meals(db.Model):
@@ -52,18 +53,5 @@ class Plans(db.Model):
         return {
             'id': self.id,
             'date': self.date,
-            'meal': self.meal_id,
+            'meal_id': self.meal_id,
         }
-
-
-def plansToDict(plans):
-    response = {}
-    for i in range(0, len(plans)):
-        response[i] = {
-            'planId': plans[i].id,
-            'day': plans[i].date,
-            'title': plans[i].title
-        }
-
-    # return must be a string, dict or tuple
-    return response

@@ -3,13 +3,14 @@ import requests
 from datetime import datetime
 from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.sql import alias
 
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-from models import Meals, Plans, plansToDict
+from models import Meals, Plans
 
 
 @app.route('/')
@@ -27,20 +28,40 @@ def home():
 @app.route('/plans/', defaults={'date': 'all'})
 @app.route('/plans/date/<date>')
 def plans(date):
+    # returns a list in this format. need to use a label, otherwise the
+    # Meals.id overrides the Plans.id and only Meals.id is available as 'id'
+    # [(planID, date, meal title, meal id), ...]
+    # [(14, datetime.date(2020, 11, 28), 'pbj', 20),
+    #  (15, datetime.date(2020, 11, 28), 'pbj', 22),
+    #  (16, datetime.date(2020, 12, 2), 'pbj', 30), ...]
+    today = datetime.now()
     try:
         if (date == 'all'):
-            plans = db.session.query(Plans.id, Plans.date,
-                                     Meals.title).join(Meals).all()
-            # returns a list in this format
-            # [(14, datetime.date(2020, 11, 28), 'pbj'),
-            #  (15, datetime.date(2020, 11, 28), 'pbj'),
-            #  (16, datetime.date(2020, 12, 2), 'pbj')]
-            return plansToDict(plans), 200
-        else:
             plans = db.session.query(
-                Plans.id, Plans.date,
-                Meals.title).join(Meals).filter(Plans.date == date).all()
-            return plansToDict(plans), 200
+                Plans.id.label('plan_id'), Plans.date, Meals.title,
+                Meals.id.label('meal_id')).join(Meals).filter(
+                    Plans.date >= today).all()
+            responses = {}
+            for row in plans:
+                the_date = row.date.strftime('%Y-%m-%d')
+                if the_date in responses.keys():
+                    responses[the_date].append(row._asdict())
+                else:
+                    responses.update({the_date: [row._asdict()]})
+            # return must be a string, dict or tuple
+            return responses, 200
+        else:
+            results = db.session.query(
+                Plans.id.label('plan_id'), Plans.date, Meals.title,
+                Meals.id.label('meal_id')).join(Meals).filter(
+                    Plans.date == date).all()
+            response = {}
+            cnt = 0
+            for row in results:
+                response.update({cnt: row._asdict()})
+                cnt += 1
+
+            return response, 200
     except Exception as err:
         return "Error getting plans from the database. {}".format(err), 400
 
